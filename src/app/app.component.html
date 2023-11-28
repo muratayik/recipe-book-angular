@@ -1,1 +1,5 @@
-<div>App works!!!</div>
+<div *ngFor="let category of categoryList">
+  <p>{{ category.id }} - {{ category.name }} - {{ category.imageURL }}</p>
+  <p>{{ category.description }}</p>
+  <hr />
+</div>
