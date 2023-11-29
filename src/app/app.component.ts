@@ -1,35 +1,23 @@
-import { Component, OnInit } from '@angular/core';
-import { CategoryService } from './category/category.service';
-import { MealService } from './meal/meal.service';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
-export class AppComponent implements OnInit {
-  categoryList: any[] = [];
-  mealList: any[] = [];
-  mealDetail: any = null;
+export class AppComponent {
   activeScreen = 'categories';
 
-  constructor(
-    private categoryService: CategoryService,
-    private mealService: MealService
-  ) {}
-
-  ngOnInit(): void {
-    this.categoryList = this.categoryService.getCategoryList();
-  }
+  selectedCategoryId = '';
+  selectedMealId = '';
 
   onShowMealList(categoryId: string) {
     this.activeScreen = 'meal-list';
-    this.mealList = this.mealService.getMealsOfCategory(categoryId);
+    this.selectedCategoryId = categoryId;
   }
 
   onShowMealDetails(mealId: string) {
     this.activeScreen = 'meal-detail';
-    this.mealDetail = this.mealService.getMeal(mealId);
-    console.log(this.mealDetail);
+    this.selectedMealId = mealId;
   }
 }
