@@ -1,5 +1,26 @@
-<div *ngFor="let category of categoryList">
-  <p>{{ category.id }} - {{ category.name }} - {{ category.imageURL }}</p>
-  <p>{{ category.description }}</p>
-  <hr />
+<div *ngIf="activeScreen === 'categories'">
+  <div *ngFor="let category of categoryList">
+    <p>{{ category.id }} - {{ category.name }} - {{ category.imageURL }}</p>
+    <p>{{ category.description }}</p>
+    <button (click)="onShowMealList(category.id)">Show Meals</button>
+    <hr />
+  </div>
+</div>
+
+<div *ngIf="activeScreen === 'meal-list'">
+  <div *ngFor="let meal of mealList">
+    <p>{{ meal.id }} - {{ meal.name }} - {{ meal.imageURL }}</p>
+    <button (click)="onShowMealDetails(meal.id)">Show Meals</button>
+    <hr />
+  </div>
+</div>
+
+<div *ngIf="activeScreen === 'meal-detail' && mealDetail">
+  <p>{{ mealDetail.id }}</p>
+  <p>{{ mealDetail.name }}</p>
+  <p>{{ mealDetail.imageURL }}</p>
+  <p>{{ mealDetail.categoryName }}</p>
+  <p [innerText]="mealDetail.instructions"></p>
+  <p>{{ mealDetail.strYoutube }}</p>
+  <p>{{ mealDetail.strSource }}</p>
 </div>

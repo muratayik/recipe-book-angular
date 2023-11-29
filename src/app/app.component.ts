@@ -8,9 +8,24 @@ import { Component, OnInit } from '@angular/core';
 export class AppComponent implements OnInit {
   categoryList: any[] = [];
   mealList: any[] = [];
+  mealDetail: any = null;
+  activeScreen = 'categories';
 
   ngOnInit(): void {
     this.categoryList = [...mockCategoryList.categories];
+  }
+
+  onShowMealList(categoryId: string) {
+    this.activeScreen = 'meal-list';
+    this.mealList = mockMealList.meals.filter(
+      (c) => c.categoryId === categoryId
+    );
+  }
+
+  onShowMealDetails(mealId: string) {
+    this.activeScreen = 'meal-detail';
+    this.mealDetail = mockMealList.meals.find((c) => c.id === mealId);
+    console.log(this.mealDetail);
   }
 }
 
