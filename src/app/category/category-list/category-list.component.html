@@ -1,6 +1,6 @@
 <div *ngFor="let category of categoryList">
   <p>{{ category.id }} - {{ category.name }} - {{ category.imageURL }}</p>
   <p>{{ category.description }}</p>
-  <button (click)="onSelectCategory(category.id)">Show Meals</button>
+  <a [routerLink]="['/', category.id, 'meals']">Show Meals</a>
   <hr />
 </div>

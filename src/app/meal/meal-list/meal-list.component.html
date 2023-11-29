@@ -1,5 +1,7 @@
+<p>Meal List</p>
+
 <div *ngFor="let meal of mealList">
   <p>{{ meal.id }} - {{ meal.name }} - {{ meal.imageURL }}</p>
-  <button (click)="onSelectMeal(meal.id)">Show Meals</button>
+  <a [routerLink]="['/', meal.id, 'details']">Show Details</a>
   <hr />
 </div>

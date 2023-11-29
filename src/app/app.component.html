@@ -1,14 +1,3 @@
-<div *ngIf="activeScreen === 'categories'">
-  <app-category-list (categoryIdSelected)="onShowMealList($event)" />
-</div>
+<a [routerLink]="['category']">Categories</a>
 
-<div *ngIf="activeScreen === 'meal-list'">
-  <app-meal-list
-    [selectedCategoryId]="selectedCategoryId"
-    (mealIdSelected)="onShowMealDetails($event)"
-  />
-</div>
-
-<div *ngIf="activeScreen === 'meal-detail'">
-  <app-meal-detail [selectedMealId]="selectedMealId" />
-</div>
+<router-outlet></router-outlet>

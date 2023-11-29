@@ -1,5 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MealService } from '../meal.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-meal-detail',
@@ -7,13 +8,15 @@ import { MealService } from '../meal.service';
   styleUrls: ['./meal-detail.component.css'],
 })
 export class MealDetailComponent implements OnInit {
-  @Input() selectedMealId: string;
-
   meal: any;
 
-  constructor(private mealService: MealService) {}
+  constructor(
+    private mealService: MealService,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
-    this.meal = this.mealService.getMeal(this.selectedMealId);
+    const mealId = this.route.snapshot.params['mealId'];
+    this.meal = this.mealService.getMeal(mealId);
   }
 }

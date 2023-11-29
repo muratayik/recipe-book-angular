@@ -1,5 +1,6 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MealService } from '../meal.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-meal-list',
@@ -7,20 +8,16 @@ import { MealService } from '../meal.service';
   styleUrls: ['./meal-list.component.css'],
 })
 export class MealListComponent implements OnInit {
-  @Input() selectedCategoryId: string;
-  @Output() mealIdSelected = new EventEmitter<string>();
-
   mealList: any[] = [];
 
-  constructor(private mealService: MealService) {}
+  constructor(
+    private mealService: MealService,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
-    this.mealList = this.mealService.getMealsOfCategory(
-      this.selectedCategoryId
-    );
-  }
+    const categoryId = this.route.snapshot.params['categoryId'];
 
-  onSelectMeal(mealId: string) {
-    this.mealIdSelected.emit(mealId);
+    this.mealList = this.mealService.getMealsOfCategory(categoryId);
   }
 }
