@@ -9,6 +9,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class MealDetailComponent implements OnInit {
   meal: any;
+  organizedIngredientList: string[] = [];
 
   constructor(
     private mealService: MealService,
@@ -18,5 +19,18 @@ export class MealDetailComponent implements OnInit {
   ngOnInit(): void {
     const mealId = this.route.snapshot.params['mealId'];
     this.meal = this.mealService.getMeal(mealId);
+    this.organizeIngredients();
+  }
+
+  organizeIngredients() {
+    for (let i = 1; i <= 20; i++) {
+      const ingredientName = this.meal[`ingredient${i}`];
+      const ingredientMeasure = this.meal[`measure${i}`];
+      if (ingredientName && ingredientMeasure) {
+        this.organizedIngredientList.push(
+          `${ingredientMeasure} ${ingredientName}`
+        );
+      }
+    }
   }
 }

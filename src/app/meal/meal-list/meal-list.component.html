@@ -1,7 +1,14 @@
-<p>Meal List</p>
-
-<div *ngFor="let meal of mealList">
-  <p>{{ meal.id }} - {{ meal.name }} - {{ meal.imageURL }}</p>
-  <a [routerLink]="['/', meal.id, 'details']">Show Details</a>
-  <hr />
+<div class="d-flex">
+  <a
+    [routerLink]="['/', meal.id, 'details']"
+    class="p-1 d-flex col-md-4 meal-card"
+    *ngFor="let meal of mealList"
+  >
+    <div class="card">
+      <img [src]="meal.imageURL" class="card-img-top" alt="..." />
+      <div class="card-body">
+        <h5 class="card-title">{{ meal.name }}</h5>
+      </div>
+    </div>
+  </a>
 </div>

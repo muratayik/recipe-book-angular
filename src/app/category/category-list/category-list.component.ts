@@ -14,4 +14,14 @@ export class CategoryListComponent implements OnInit {
   ngOnInit(): void {
     this.categoryList = this.categoryService.getCategoryList();
   }
+
+  getDescriptionSummary(description: string) {
+    const descriptionMaxLen = 200;
+
+    if (description.length < descriptionMaxLen) {
+      return description;
+    }
+
+    return description.substring(0, descriptionMaxLen) + '...';
+  }
 }
