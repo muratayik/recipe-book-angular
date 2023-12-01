@@ -1,4 +1,4 @@
-<div *ngIf="meal">
+<div *ngIf="meal; else loadingBlock">
   <h3 class="text-center py-2">{{ meal.strCategory }} -> {{ meal.strMeal }}</h3>
 
   <div class="col" *ngIf="meal.strSource">
@@ -37,3 +37,5 @@
   <h4>Instructions</h4>
   <p [innerText]="meal.strInstructions"></p>
 </div>
+
+<ng-template #loadingBlock>Loading...</ng-template>

@@ -1,4 +1,4 @@
-<div class="row" *ngIf="categoryList">
+<div class="row" *ngIf="categoryList?.length; else loadingBlock">
   <a
     [routerLink]="['/', category.strCategory, 'meals']"
     class="p-1 col-xs-12 col-md-3 category-card"
@@ -15,3 +15,5 @@
     </div>
   </a>
 </div>
+
+<ng-template #loadingBlock>Loading...</ng-template>
