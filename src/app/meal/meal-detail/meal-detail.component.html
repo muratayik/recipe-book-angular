@@ -1,33 +1,39 @@
-<h3 class="text-center py-2">{{ meal.categoryName }} -> {{ meal.name }}</h3>
+<div *ngIf="meal">
+  <h3 class="text-center py-2">{{ meal.strCategory }} -> {{ meal.strMeal }}</h3>
 
-<div class="col" *ngIf="meal.strSource">
-  <span
-    ><h5 class="d-inline-flex px-2">Source :</h5>
-    <a [href]="meal.strSource" target="_blank">{{ meal.strSource }}</a>
-  </span>
-</div>
+  <div class="col" *ngIf="meal.strSource">
+    <span
+      ><h5 class="d-inline-flex px-2">Source :</h5>
+      <a [href]="meal.strSource" target="_blank">{{ meal.strSource }}</a>
+    </span>
+  </div>
 
-<div class="col" *ngIf="meal.strYoutube">
-  <span
-    ><h5 class="d-inline-flex px-2">Youtube :</h5>
-    <a [href]="meal.strYoutube" target="_blank">{{ meal.strYoutube }}</a>
-  </span>
-</div>
+  <div class="col" *ngIf="meal.strYoutube">
+    <span
+      ><h5 class="d-inline-flex px-2">Youtube :</h5>
+      <a [href]="meal.strYoutube" target="_blank">{{ meal.strYoutube }}</a>
+    </span>
+  </div>
 
-<div class="col">
-  <div class="row">
-    <div class="col-xs-12 col-md-6 p-3">
-      <ul>
-        <li *ngFor="let ingredient of organizedIngredientList">
-          {{ ingredient }}
-        </li>
-      </ul>
-    </div>
-    <div class="col-xs-12 col-md-6 p-3">
-      <img [src]="meal.imageURL" [alt]="meal.name" class="img-fluid h-75" />
+  <div class="col">
+    <div class="row">
+      <div class="col-xs-12 col-md-6 p-3">
+        <ul>
+          <li *ngFor="let ingredient of organizedIngredientList">
+            {{ ingredient }}
+          </li>
+        </ul>
+      </div>
+      <div class="col-xs-12 col-md-6 p-3">
+        <img
+          [src]="meal.strMealThumb"
+          [alt]="meal.strMeal"
+          class="img-fluid h-75"
+        />
+      </div>
     </div>
   </div>
-</div>
 
-<h4>Instructions</h4>
-<p [innerText]="meal.instructions"></p>
+  <h4>Instructions</h4>
+  <p [innerText]="meal.strInstructions"></p>
+</div>

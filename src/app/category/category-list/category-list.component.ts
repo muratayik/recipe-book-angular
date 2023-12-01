@@ -1,18 +1,25 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CategoryService } from '../category.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-category-list',
   templateUrl: './category-list.component.html',
   styleUrls: ['./category-list.component.css'],
 })
-export class CategoryListComponent implements OnInit {
+export class CategoryListComponent implements OnInit, OnDestroy {
   categoryList: any[] = [];
+
+  categoryListSubs: Subscription;
 
   constructor(private categoryService: CategoryService) {}
 
   ngOnInit(): void {
-    this.categoryList = this.categoryService.getCategoryList();
+    this.categoryListSubs = this.categoryService
+      .getCategories()
+      .subscribe((data: any) => {
+        this.categoryList = data.categories;
+      });
   }
 
   getDescriptionSummary(description: string) {
@@ -23,5 +30,9 @@ export class CategoryListComponent implements OnInit {
     }
 
     return description.substring(0, descriptionMaxLen) + '...';
+  }
+
+  ngOnDestroy(): void {
+    this.categoryListSubs?.unsubscribe();
   }
 }

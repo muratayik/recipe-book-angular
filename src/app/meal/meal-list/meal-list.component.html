@@ -1,13 +1,13 @@
-<div class="d-flex">
+<div class="row">
   <a
-    [routerLink]="['/', meal.id, 'details']"
-    class="p-1 d-flex col-md-4 meal-card"
+    [routerLink]="['/', meal.idMeal, 'details']"
+    class="p-1 col-md-4 meal-card"
     *ngFor="let meal of mealList"
   >
-    <div class="card">
-      <img [src]="meal.imageURL" class="card-img-top" alt="..." />
+    <div class="card h-100">
+      <img [src]="meal.strMealThumb" class="card-img-top" alt="..." />
       <div class="card-body">
-        <h5 class="card-title">{{ meal.name }}</h5>
+        <h5 class="card-title">{{ meal.strMeal }}</h5>
       </div>
     </div>
   </a>

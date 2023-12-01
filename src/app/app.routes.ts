@@ -15,7 +15,7 @@ const routes: Routes = [
     component: CategoryListComponent,
   },
   {
-    path: ':categoryId/meals',
+    path: ':categoryName/meals',
     component: MealListComponent,
   },
   {

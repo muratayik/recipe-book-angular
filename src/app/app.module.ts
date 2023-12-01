@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { CategoryListComponent } from './category/category-list/category-list.component';
@@ -16,7 +17,7 @@ import { NavbarComponent } from './navbar/navbar.component';
     MealDetailComponent,
     NavbarComponent,
   ],
-  imports: [BrowserModule, AppRoutesModule],
+  imports: [BrowserModule, AppRoutesModule, HttpClientModule],
   providers: [],
   bootstrap: [AppComponent],
 })
