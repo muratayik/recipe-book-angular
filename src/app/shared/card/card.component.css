@@ -1,0 +1,7 @@
+.card-item {
+  text-decoration: none;
+}
+
+.card-item :hover {
+  background-color: rgb(202, 235, 235);
+}
