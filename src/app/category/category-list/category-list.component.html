@@ -1,18 +1,15 @@
 <div class="row" *ngIf="categoryList?.length; else loadingBlock">
   <a
     [routerLink]="['/', category.strCategory, 'meals']"
-    class="p-1 col-xs-12 col-md-3 category-card"
+    class="p-1 col-xs-12 col-sm-6 col-md-4 col-lg-3 category-card"
     *ngFor="let category of categoryList"
   >
-    <div class="card h-100">
-      <img [src]="category.strCategoryThumb" class="card-img-top" alt="..." />
-      <div class="card-body">
-        <h5 class="card-title">{{ category.strCategory }}</h5>
-        <p class="card-text text-muted">
-          {{ getDescriptionSummary(category.strCategoryDescription) }}
-        </p>
-      </div>
-    </div>
+    <app-card
+      [imageUrl]="category.strCategoryThumb"
+      [description]="category.strCategoryDescription"
+      [maxDescriptionLength]="200"
+      [title]="category.strCategory"
+    ></app-card>
   </a>
 </div>
 

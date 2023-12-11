@@ -1,0 +1,9 @@
+<div class="card h-100">
+  <img [src]="imageUrl" class="card-img-top" alt="..." />
+  <div class="card-body">
+    <h5 class="card-title">{{ title }}</h5>
+    <p *ngIf="description" class="card-text text-muted">
+      {{ getDescriptionSummary() }}
+    </p>
+  </div>
+</div>
