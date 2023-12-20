@@ -17,8 +17,8 @@ export class CategoryListComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.categoryListSubs = this.categoryService
       .getCategories()
-      .subscribe((data: any) => {
-        this.categoryList = data.categories;
+      .subscribe((categories) => {
+        this.categoryList = categories;
       });
   }
 

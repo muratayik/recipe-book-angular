@@ -23,8 +23,8 @@ export class MealListComponent implements OnInit, OnDestroy {
 
     this.mealListSubs = this.mealService
       .getMeals(categoryName)
-      .subscribe((data: any) => {
-        this.mealList = data.meals;
+      .subscribe((mealList) => {
+        this.mealList = mealList;
       });
   }
 

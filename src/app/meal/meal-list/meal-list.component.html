@@ -4,9 +4,9 @@
     *ngFor="let meal of mealList"
   >
     <app-card
-      [link]="['/', meal.idMeal, 'details']"
-      [imageUrl]="meal.strMealThumb"
-      [title]="meal.strMeal"
+      [link]="['/', meal.publicId, 'details']"
+      [imageUrl]="meal.imageUrl"
+      [title]="meal.name"
     ></app-card>
   </div>
 </div>

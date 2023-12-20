@@ -2,6 +2,9 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MealService } from '../meal.service';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { MealListItem } from '../meal-list-item.model';
+import { Category } from 'src/app/category/category.model';
+import { Ingredient, Instruction } from '../meal-detail.model';
 
 @Component({
   selector: 'app-meal-detail',
@@ -9,8 +12,11 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./meal-detail.component.css'],
 })
 export class MealDetailComponent implements OnInit, OnDestroy {
-  meal: any;
-  organizedIngredientList: string[] = [];
+  isMealLoaded = false;
+  mealInfo: MealListItem;
+  categoryInfo: Category;
+  instructions: Instruction[];
+  ingredients: Ingredient[];
 
   getMealSubs: Subscription;
 
@@ -20,26 +26,18 @@ export class MealDetailComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    const mealId = this.route.snapshot.params['mealId'];
+    const mealPublicId = this.route.snapshot.params['mealPublicId'];
 
     this.getMealSubs = this.mealService
-      .getMeal(mealId)
-      .subscribe((data: any) => {
-        this.meal = data.meals[0];
-        this.organizeIngredients();
+      .getMeal(mealPublicId)
+      .subscribe((meal) => {
+        const { mealInfo, categoryInfo, instructions, ingredients } = meal;
+        this.mealInfo = mealInfo;
+        this.categoryInfo = categoryInfo;
+        this.instructions = instructions;
+        this.ingredients = ingredients;
+        this.isMealLoaded = true;
       });
-  }
-
-  organizeIngredients() {
-    for (let i = 1; i <= 20; i++) {
-      const ingredientName = this.meal[`strIngredient${i}`];
-      const ingredientMeasure = this.meal[`strMeasure${i}`];
-      if (ingredientName && ingredientMeasure) {
-        this.organizedIngredientList.push(
-          `${ingredientMeasure} ${ingredientName}`
-        );
-      }
-    }
   }
 
   ngOnDestroy(): void {

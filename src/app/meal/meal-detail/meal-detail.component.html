@@ -1,17 +1,23 @@
-<div *ngIf="meal; else loadingBlock">
-  <h3 class="text-center py-2">{{ meal.strCategory }} -> {{ meal.strMeal }}</h3>
+<div *ngIf="isMealLoaded; else loadingBlock">
+  <h3 class="text-center py-2">
+    {{ categoryInfo.name }} -> {{ mealInfo.name }}
+  </h3>
 
-  <div class="col" *ngIf="meal.strSource">
+  <div class="col" *ngIf="mealInfo.sourceUrl">
     <span
       ><h5 class="d-inline-flex px-2">Source :</h5>
-      <a [href]="meal.strSource" target="_blank">{{ meal.strSource }}</a>
+      <a [href]="mealInfo.sourceUrl" target="_blank">{{
+        mealInfo.sourceUrl
+      }}</a>
     </span>
   </div>
 
-  <div class="col" *ngIf="meal.strYoutube">
+  <div class="col" *ngIf="mealInfo.youtubeUrl">
     <span
       ><h5 class="d-inline-flex px-2">Youtube :</h5>
-      <a [href]="meal.strYoutube" target="_blank">{{ meal.strYoutube }}</a>
+      <a [href]="mealInfo.youtubeUrl" target="_blank">{{
+        mealInfo.youtubeUrl
+      }}</a>
     </span>
   </div>
 
@@ -19,15 +25,15 @@
     <div class="row">
       <div class="col-xs-12 col-md-6 p-3">
         <ul>
-          <li *ngFor="let ingredient of organizedIngredientList">
-            {{ ingredient }}
+          <li *ngFor="let ingredient of ingredients">
+            {{ ingredient.amount }} - {{ ingredient.name }}
           </li>
         </ul>
       </div>
       <div class="col-xs-12 col-md-6 p-3">
         <img
-          [src]="meal.strMealThumb"
-          [alt]="meal.strMeal"
+          [src]="mealInfo.imageUrl"
+          [alt]="mealInfo.name"
           class="img-fluid h-75"
         />
       </div>
@@ -35,7 +41,7 @@
   </div>
 
   <h4>Instructions</h4>
-  <p [innerText]="meal.strInstructions"></p>
+  <p *ngFor="let instruction of instructions">{{ instruction.step }}</p>
 </div>
 
 <ng-template #loadingBlock>Loading...</ng-template>

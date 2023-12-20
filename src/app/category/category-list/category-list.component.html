@@ -4,11 +4,11 @@
     *ngFor="let category of categoryList"
   >
     <app-card
-      [link]="['/', category.strCategory, 'meals']"
-      [imageUrl]="category.strCategoryThumb"
-      [description]="category.strCategoryDescription"
+      [link]="['/', category.publicId, 'meals']"
+      [imageUrl]="category.imageUrl"
+      [description]="category.description"
       [maxDescriptionLength]="200"
-      [title]="category.strCategory"
+      [title]="category.name"
     ></app-card>
   </div>
 </div>
