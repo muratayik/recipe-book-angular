@@ -50,6 +50,37 @@ export class AuthService {
       });
   }
 
+  registerUser(email: string, username: string, password: string) {
+    const data = {
+      email,
+      username,
+      password,
+    };
+
+    return this.http
+      .post<AuthAPIResponse>('http://localhost:3001/account/register', data)
+      .subscribe({
+        next: (data) => {
+          const { email, role, token, username } = data;
+
+          localStorage.setItem('token', token);
+
+          this.authenticationInfo = {
+            isLoggedIn: true,
+            username,
+            role,
+            email,
+          };
+
+          this.notifyAuthListeners();
+          this.router.navigate(['/', 'category']);
+        },
+        error: (error) => {
+          console.log('error :', error);
+        },
+      });
+  }
+
   logout() {
     localStorage.removeItem('token');
     this.authenticationInfo = {
