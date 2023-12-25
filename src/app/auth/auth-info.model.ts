@@ -3,4 +3,5 @@ export interface AuthInfo {
   email: string;
   username: string;
   role: string;
+  token: string;
 }

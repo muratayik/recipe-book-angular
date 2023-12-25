@@ -10,14 +10,16 @@ import { Subscription } from 'rxjs';
 export class NavbarComponent implements OnInit, OnDestroy {
   authSubs: Subscription;
   isLoggedIn = false;
+  username = '';
 
   constructor(private authService: AuthService) {}
 
   ngOnInit(): void {
     this.authSubs = this.authService.authenticationStatusChanged.subscribe(
       (authInfo) => {
-        const { isLoggedIn } = authInfo;
+        const { isLoggedIn, username } = authInfo;
         this.isLoggedIn = isLoggedIn;
+        this.username = username;
       }
     );
   }

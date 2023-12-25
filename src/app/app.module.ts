@@ -13,6 +13,7 @@ import { LoginComponent } from './auth/login/login.component';
 import { LogoutComponent } from './auth/logout/logout.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RegisterComponent } from './auth/register/register.component';
+import { FavoriteComponent } from './favorite/favorite.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { RegisterComponent } from './auth/register/register.component';
     LoginComponent,
     LogoutComponent,
     RegisterComponent,
+    FavoriteComponent,
   ],
   imports: [
     BrowserModule,

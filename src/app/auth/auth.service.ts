@@ -14,11 +14,16 @@ export class AuthService {
     email: '',
     username: '',
     role: '',
+    token: '',
   };
 
   authenticationStatusChanged = new Subject<AuthInfo>();
 
   constructor(private http: HttpClient, private router: Router) {}
+
+  getToken() {
+    return this.authenticationInfo.token || localStorage.getItem('token') || '';
+  }
 
   loginUser(email: string, password: string, rememberMe: boolean) {
     const data = {
@@ -39,6 +44,7 @@ export class AuthService {
             username,
             role,
             email,
+            token,
           };
 
           this.notifyAuthListeners();
@@ -70,6 +76,7 @@ export class AuthService {
             username,
             role,
             email,
+            token,
           };
 
           this.notifyAuthListeners();
@@ -88,6 +95,7 @@ export class AuthService {
       username: '',
       role: '',
       email: '',
+      token: '',
     };
     this.notifyAuthListeners();
     this.router.navigate(['/', 'category']);
@@ -112,6 +120,7 @@ export class AuthService {
             username,
             role,
             email,
+            token: localStorageToken,
           };
 
           this.notifyAuthListeners();
