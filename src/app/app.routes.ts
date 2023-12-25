@@ -3,6 +3,9 @@ import { RouterModule, Routes } from '@angular/router';
 import { CategoryListComponent } from './category/category-list/category-list.component';
 import { MealListComponent } from './meal/meal-list/meal-list.component';
 import { MealDetailComponent } from './meal/meal-detail/meal-detail.component';
+import { LoginComponent } from './auth/login/login.component';
+import { LogoutComponent } from './auth/logout/logout.component';
+import { RegisterComponent } from './auth/register/register.component';
 
 const routes: Routes = [
   {
@@ -21,6 +24,18 @@ const routes: Routes = [
   {
     path: ':mealPublicId/details',
     component: MealDetailComponent,
+  },
+  {
+    path: 'login',
+    component: LoginComponent,
+  },
+  {
+    path: 'logout',
+    component: LogoutComponent,
+  },
+  {
+    path: 'register',
+    component: RegisterComponent,
   },
 ];
 
