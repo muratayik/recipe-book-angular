@@ -1,11 +1,30 @@
-<a [routerLink]="link" class="p-1 card-item">
-  <div class="card h-100">
-    <img [src]="imageUrl" class="card-img-top" alt="..." />
-    <div class="card-body">
-      <h5 class="card-title text-center">{{ title }}</h5>
-      <p *ngIf="description" class="card-text text-muted">
-        {{ getDescriptionSummary() }}
-      </p>
+<div class="card h-100">
+  <a [routerLink]="link" class="card-item h-100">
+    <div class="card-body h-100">
+      <img [src]="imageUrl" class="card-img-top" alt="..." />
+      <h5 class="card-title text-center py-2">{{ title }}</h5>
+      <span
+        class="d-inline-block"
+        tabindex="0"
+        data-bs-toggle="tooltip"
+        [title]="description"
+      >
+        <p *ngIf="description" class="card-text text-muted">
+          {{ getDescriptionSummary() }}
+        </p>
+      </span>
     </div>
+  </a>
+  <div class="card-footer d-flex justify-content-end" *ngIf="showFavoriteIcon">
+    <span
+      class="d-inline-block"
+      tabindex="0"
+      data-bs-toggle="tooltip"
+      title="Add To Favorites"
+    >
+      <mat-icon aria-hidden="false" aria-label="my clock"
+        >favorite_border</mat-icon
+      >
+    </span>
   </div>
-</a>
+</div>

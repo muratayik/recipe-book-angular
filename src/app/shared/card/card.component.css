@@ -1,7 +1,15 @@
 .card-item {
   text-decoration: none;
+  color: rgb(123, 122, 122);
 }
 
 .card-item :hover {
   background-color: rgb(202, 235, 235);
+}
+
+.mat-icon {
+  font-size: 35px;
+  height: 35px;
+  width: 35px;
+  cursor: pointer;
 }

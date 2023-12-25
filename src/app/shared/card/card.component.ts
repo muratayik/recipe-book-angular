@@ -11,6 +11,8 @@ export class CardComponent {
   @Input() title: string;
   @Input() description: string;
   @Input() maxDescriptionLength: number;
+  @Input() showFavoriteIcon: boolean;
+  @Input() favoriteItemId: string;
 
   getDescriptionSummary() {
     if (this.description.length < this.maxDescriptionLength) {

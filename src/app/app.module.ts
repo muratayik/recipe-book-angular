@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
+import { MatIconModule } from '@angular/material/icon';
 
 import { AppComponent } from './app.component';
 import { CategoryListComponent } from './category/category-list/category-list.component';
@@ -33,6 +34,7 @@ import { FavoriteComponent } from './favorite/favorite.component';
     AppRoutesModule,
     HttpClientModule,
     ReactiveFormsModule,
+    MatIconModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
