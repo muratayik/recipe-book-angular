@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Favorite } from './favorite.model';
 import { FavoriteService } from './favorite.service';
 import { Subscription } from 'rxjs';
+import { MealListItem } from '../meal/meal-list-item.model';
 
 @Component({
   selector: 'app-favorite',
@@ -9,17 +9,18 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./favorite.component.css'],
 })
 export class FavoriteComponent implements OnInit, OnDestroy {
-  favorites: Favorite[];
+  favoriteMeals: MealListItem[];
   favoriteListSubs: Subscription;
+  isFavoritesFetched = false;
 
   constructor(private favoriteService: FavoriteService) {}
 
   ngOnInit(): void {
-    this.favoriteService.getFavorites();
+    this.isFavoritesFetched = this.favoriteService.getIsFavoritesFetched();
+    this.favoriteMeals = this.favoriteService.getFetchedFavorites();
     this.favoriteListSubs = this.favoriteService.favoriteListChanged.subscribe(
       (data) => {
-        console.log('favorites : ', data);
-        this.favorites = data;
+        this.favoriteMeals = data;
       }
     );
   }

@@ -1,1 +1,21 @@
-<p>favorite works!</p>
+<div class="row" *ngIf="isFavoritesFetched; else loadingBlock">
+  <ng-container *ngIf="favoriteMeals.length > 0; else NoFavorites">
+    <div
+      class="p-1 col-xs-12 col-sm-6 col-md-4 col-lg-3 card-item"
+      *ngFor="let favoriteMeal of favoriteMeals"
+    >
+      <app-card
+        [link]="['/', favoriteMeal.publicId, 'details']"
+        [imageUrl]="favoriteMeal.imageUrl"
+        [title]="favoriteMeal.name"
+        [showFavoriteIcon]="true"
+        [favoriteItemId]="favoriteMeal.publicId"
+      ></app-card>
+    </div>
+  </ng-container>
+</div>
+
+<ng-template #loadingBlock>Loading...</ng-template>
+<ng-template #NoFavorites>
+  <h4 class="text-center p-4">You don't have any favorites yet</h4>
+</ng-template>

@@ -22,8 +22,19 @@
       data-bs-toggle="tooltip"
       title="Add To Favorites"
     >
-      <mat-icon aria-hidden="false" aria-label="my clock"
+      <mat-icon
+        aria-hidden="false"
+        aria-label="my clock"
+        (click)="addToFavorites(favoriteItemId)"
+        *ngIf="!isInFavorites"
         >favorite_border</mat-icon
+      >
+      <mat-icon
+        aria-hidden="false"
+        aria-label="my clock"
+        (click)="removeFromFavorites(favoriteItemId)"
+        *ngIf="isInFavorites"
+        >favorite</mat-icon
       >
     </span>
   </div>

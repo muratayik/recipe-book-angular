@@ -28,7 +28,6 @@ export class RegisterComponent implements OnInit {
 
   onSubmit(form: FormGroup) {
     const { email, username, password } = form.value;
-    console.log(username, '-', password, '-', email);
 
     this.authService.registerUser(email, username, password);
   }
