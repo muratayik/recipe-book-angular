@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, isDevMode } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { MatIconModule } from '@angular/material/icon';
@@ -15,6 +15,10 @@ import { LogoutComponent } from './auth/logout/logout.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RegisterComponent } from './auth/register/register.component';
 import { FavoriteComponent } from './favorite/favorite.component';
+import { StoreModule } from '@ngrx/store';
+
+import * as fromApp from '../store/state';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 @NgModule({
   declarations: [
@@ -35,6 +39,8 @@ import { FavoriteComponent } from './favorite/favorite.component';
     HttpClientModule,
     ReactiveFormsModule,
     MatIconModule,
+    StoreModule.forRoot(fromApp.appReducer),
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
   ],
   providers: [],
   bootstrap: [AppComponent],
