@@ -1,8 +1,8 @@
-<div class="row" *ngIf="isFavoritesFetched; else loadingBlock">
-  <ng-container *ngIf="favoriteMeals.length > 0; else NoFavorites">
+<div class="row" *ngIf="favoritesFetched; else loadingBlock">
+  <ng-container *ngIf="favorites.length > 0; else NoFavorites">
     <div
       class="p-1 col-xs-12 col-sm-6 col-md-4 col-lg-3 card-item"
-      *ngFor="let favoriteMeal of favoriteMeals"
+      *ngFor="let favoriteMeal of favorites"
     >
       <app-card
         [link]="['/', favoriteMeal.publicId, 'details']"

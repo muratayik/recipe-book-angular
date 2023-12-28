@@ -1,6 +1,9 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FavoriteService } from './favorite.service';
-import { Subscription } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+
+import { Store } from '@ngrx/store';
+import * as fromApp from '../store/state';
+import * as FavoriteSelectors from '../store/favorite/favorite.selectors';
+
 import { MealListItem } from '../meal/meal-list-item.model';
 
 @Component({
@@ -8,24 +11,23 @@ import { MealListItem } from '../meal/meal-list-item.model';
   templateUrl: './favorite.component.html',
   styleUrls: ['./favorite.component.css'],
 })
-export class FavoriteComponent implements OnInit, OnDestroy {
-  favoriteMeals: MealListItem[];
-  favoriteListSubs: Subscription;
-  isFavoritesFetched = false;
+export class FavoriteComponent implements OnInit {
+  favoritesFetched = false;
+  favorites: MealListItem[];
 
-  constructor(private favoriteService: FavoriteService) {}
+  constructor(private store: Store<fromApp.AppState>) {}
 
   ngOnInit(): void {
-    this.isFavoritesFetched = this.favoriteService.getIsFavoritesFetched();
-    this.favoriteMeals = this.favoriteService.getFetchedFavorites();
-    this.favoriteListSubs = this.favoriteService.favoriteListChanged.subscribe(
-      (data) => {
-        this.favoriteMeals = data;
-      }
-    );
-  }
+    this.store
+      .select(FavoriteSelectors.selectFavoritesFetched)
+      .subscribe((favoritesFetched) => {
+        this.favoritesFetched = favoritesFetched;
+      });
 
-  ngOnDestroy(): void {
-    this.favoriteListSubs?.unsubscribe();
+    this.store
+      .select(FavoriteSelectors.selectFavorites)
+      .subscribe((favorites) => {
+        this.favorites = favorites;
+      });
   }
 }

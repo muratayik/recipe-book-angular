@@ -1,5 +1,10 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
+
+import { Store } from '@ngrx/store';
+import * as fromApp from '../../store/state';
+import * as FavoriteSelectors from '../../store/favorite/favorite.selectors';
+
 import { FavoriteService } from 'src/app/favorite/favorite.service';
 
 @Component({
@@ -19,18 +24,21 @@ export class CardComponent implements OnInit, OnDestroy {
   isInFavorites = false;
   favoriteListChangedSubs: Subscription;
 
-  constructor(private favoriteService: FavoriteService) {}
+  constructor(
+    private favoriteService: FavoriteService,
+    private store: Store<fromApp.AppState>
+  ) {}
 
   ngOnInit(): void {
-    this.isInFavorites = this.favoriteService.isInFavorites(
-      this.favoriteItemId
-    );
-
-    this.favoriteService.favoriteListChanged.subscribe((data) => {
-      this.isInFavorites = !!data.find(
-        (f) => f.publicId === this.favoriteItemId
+    if (!!this.favoriteItemId) {
+      const selector = FavoriteSelectors.selectIsInFavorites(
+        this.favoriteItemId
       );
-    });
+
+      this.store.select(selector).subscribe((isInFavorites) => {
+        this.isInFavorites = isInFavorites;
+      });
+    }
   }
 
   getDescriptionSummary() {

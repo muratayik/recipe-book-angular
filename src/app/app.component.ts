@@ -20,7 +20,7 @@ export class AppComponent implements OnInit, OnDestroy {
     this.authService.autoLogin();
     this.authService.authenticationStatusChanged.subscribe((data) => {
       if (data.isLoggedIn) {
-        this.favoriteService.getFavorites();
+        this.favoriteService.fetchFavorites();
       }
     });
   }

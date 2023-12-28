@@ -23,9 +23,7 @@ export const categoryReducer = createReducer(
   initialState,
   on(fetchCategories, (state) => ({
     ...state,
-    categoriesFetched: false,
-    categories: initialState.categories,
-    error: initialState.error,
+    ...initialState,
   })),
   on(fetchCategoriesSuccess, (state, { categories }) => ({
     ...state,
