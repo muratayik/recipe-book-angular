@@ -17,7 +17,7 @@ import { RegisterComponent } from './auth/register/register.component';
 import { FavoriteComponent } from './favorite/favorite.component';
 import { StoreModule } from '@ngrx/store';
 
-import * as fromApp from '../store/state';
+import * as fromApp from './store/state';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 @NgModule({

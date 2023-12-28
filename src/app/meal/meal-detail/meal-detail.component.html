@@ -1,4 +1,4 @@
-<div *ngIf="isMealLoaded; else loadingBlock">
+<div *ngIf="mealDetailFetched; else loadingBlock">
   <h3 class="text-center py-2">
     {{ categoryInfo.name }} -> {{ mealInfo.name }}
   </h3>

@@ -9,6 +9,6 @@ export const fetchCategoriesSuccess = createAction(
 );
 
 export const fetchCategoriesFailure = createAction(
-  '[Category] FetchCategories Failuer',
+  '[Category] FetchCategories Failure',
   props<{ error: string }>()
 );
