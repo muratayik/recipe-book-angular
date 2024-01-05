@@ -98,4 +98,8 @@ export class FavoriteService {
       headers,
     };
   }
+
+  clearFavorites() {
+    this.store.dispatch(FavoriteActions.clearFavorites());
+  }
 }

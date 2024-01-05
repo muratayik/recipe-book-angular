@@ -40,5 +40,9 @@ export const favoriteReducer = createReducer(
   on(FavoriteActions.removeFromFavorites, (state, { favorite }) => ({
     ...state,
     favorites: state.favorites.filter((f) => f.publicId !== favorite.publicId),
+  })),
+  on(FavoriteActions.clearFavorites, (state) => ({
+    ...state,
+    ...initialState,
   }))
 );

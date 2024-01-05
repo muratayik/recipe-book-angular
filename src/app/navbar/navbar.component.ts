@@ -1,6 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { AuthService } from '../auth/auth.service';
 import { Subscription } from 'rxjs';
+
+import { Store } from '@ngrx/store';
+import * as fromApp from '../store/state';
+import * as AuthSelectors from '../store/auth/auth.selectors';
 
 @Component({
   selector: 'app-navbar',
@@ -12,16 +15,15 @@ export class NavbarComponent implements OnInit, OnDestroy {
   isLoggedIn = false;
   username = '';
 
-  constructor(private authService: AuthService) {}
+  constructor(private store: Store<fromApp.AppState>) {}
 
   ngOnInit(): void {
-    this.authSubs = this.authService.authenticationStatusChanged.subscribe(
-      (authInfo) => {
-        const { isLoggedIn, username } = authInfo;
+    this.store
+      .select(AuthSelectors.selectIsLoggedInAndUsername)
+      .subscribe(({ isLoggedIn, username }) => {
         this.isLoggedIn = isLoggedIn;
         this.username = username;
-      }
-    );
+      });
   }
 
   ngOnDestroy(): void {}
