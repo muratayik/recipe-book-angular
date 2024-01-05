@@ -2,7 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AuthInfo } from './auth-info.model';
 import { AuthAPIResponse } from './auth-rapi-response.model';
-import { Subject } from 'rxjs';
 import { Router } from '@angular/router';
 
 import { Store } from '@ngrx/store';

@@ -6,6 +6,7 @@ import { Store } from '@ngrx/store';
 import * as fromApp from '../../store/state';
 import * as MealSelectors from '../../store/meal/meal.selectors';
 import { MealListItem } from '../meal-list-item.model';
+import * as AuthSelectors from '../../store/auth/auth.selectors';
 
 @Component({
   selector: 'app-meal-list',
@@ -15,6 +16,7 @@ import { MealListItem } from '../meal-list-item.model';
 export class MealListComponent implements OnInit {
   mealList: MealListItem[] = [];
   mealListFetched = false;
+  isLoggedIn = false;
 
   constructor(
     private mealService: MealService,
@@ -36,5 +38,11 @@ export class MealListComponent implements OnInit {
     this.store.select(MealSelectors.selectMealList).subscribe((mealList) => {
       this.mealList = mealList;
     });
+
+    this.store
+      .select(AuthSelectors.selectIsLoggedIn)
+      .subscribe((isLoggedIn) => {
+        this.isLoggedIn = isLoggedIn;
+      });
   }
 }

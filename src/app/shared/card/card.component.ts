@@ -20,6 +20,7 @@ export class CardComponent implements OnInit, OnDestroy {
   @Input() maxDescriptionLength: number;
   @Input() showFavoriteIcon: boolean;
   @Input() favoriteItemId: string;
+  @Input() isLoggedIn: boolean;
 
   isInFavorites = false;
   favoriteListChangedSubs: Subscription;
