@@ -1,87 +1,16 @@
 <div class="card h-100">
   <a [routerLink]="link" class="card-item h-100">
     <div class="card-body h-100">
-      <img [src]="imageUrl" class="card-img-top" alt="..." />
+      <img [src]="imageUrl" class="card-img-top" [alt]="title" />
       <h5 class="card-title text-center py-2">{{ title }}</h5>
-      <span
-        class="d-inline-block"
-        tabindex="0"
-        data-bs-toggle="tooltip"
-        [title]="description"
-      >
-        <p *ngIf="description" class="card-text text-muted">
-          {{ getDescriptionSummary() }}
-        </p>
-      </span>
+      <app-card-description [description]="description"></app-card-description>
     </div>
   </a>
   <div class="card-footer d-flex justify-content-end" *ngIf="showFavoriteIcon">
-    <span
-      class="d-inline-block"
-      tabindex="0"
-      data-bs-toggle="tooltip"
-      title="Add To Favorites"
-    >
-      <mat-icon
-        aria-hidden="false"
-        aria-label="my clock"
-        data-bs-toggle="modal"
-        data-bs-target="#exampleModal"
-        *ngIf="!isLoggedIn"
-        >favorite_border</mat-icon
-      >
-      <mat-icon
-        aria-hidden="false"
-        aria-label="my clock"
-        (click)="addToFavorites(favoriteItemId)"
-        *ngIf="isLoggedIn && !isInFavorites"
-        >favorite_border</mat-icon
-      >
-      <mat-icon
-        aria-hidden="false"
-        aria-label="my clock"
-        (click)="removeFromFavorites(favoriteItemId)"
-        *ngIf="isLoggedIn && isInFavorites"
-        >favorite</mat-icon
-      >
-    </span>
-  </div>
-</div>
-
-<!-- Modal -->
-<div
-  class="modal fade"
-  id="exampleModal"
-  tabindex="-1"
-  aria-labelledby="exampleModalLabel"
-  aria-hidden="true"
->
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-        <button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="modal"
-          aria-label="Close"
-        ></button>
-      </div>
-      <div class="modal-body">
-        <p>Login required to perform this action.</p>
-        <span
-          >Please
-          <a [routerLink]="['/', 'login']" data-bs-dismiss="modal">Login</a> or
-          <a [routerLink]="['/', 'register']" data-bs-dismiss="modal"
-            >Register</a
-          ></span
-        >
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-          Close
-        </button>
-      </div>
-    </div>
+    <app-card-footer
+      [isLoggedIn]="isLoggedIn"
+      [isInFavorites]="isInFavorites"
+      [favoriteItemId]="favoriteItemId"
+    ></app-card-footer>
   </div>
 </div>

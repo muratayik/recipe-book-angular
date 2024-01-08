@@ -19,6 +19,9 @@ import { StoreModule } from '@ngrx/store';
 
 import * as fromApp from './store/state';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { DescriptionDirective } from './shared/directive/description.directive';
+import { CardDescriptionComponent } from './shared/card/card-description/card-description.component';
+import { CardFooterComponent } from './shared/card/card-footer/card-footer.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +35,9 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
     LogoutComponent,
     RegisterComponent,
     FavoriteComponent,
+    DescriptionDirective,
+    CardDescriptionComponent,
+    CardFooterComponent,
   ],
   imports: [
     BrowserModule,
