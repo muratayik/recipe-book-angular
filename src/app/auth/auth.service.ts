@@ -8,6 +8,8 @@ import { Store } from '@ngrx/store';
 import * as fromApp from '../store/state';
 import * as AuthActions from '../store/auth/auth.actions';
 
+import { ToastrService } from 'ngx-toastr';
+
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -17,7 +19,8 @@ export class AuthService {
   constructor(
     private http: HttpClient,
     private router: Router,
-    private store: Store<fromApp.AppState>
+    private store: Store<fromApp.AppState>,
+    private toastr: ToastrService
   ) {}
 
   getToken() {
@@ -27,6 +30,7 @@ export class AuthService {
   }
 
   loginUser(email: string, password: string, rememberMe: boolean) {
+    this.store.dispatch(AuthActions.login());
     const data = {
       email,
       password,
@@ -51,13 +55,14 @@ export class AuthService {
           this.store.dispatch(AuthActions.loginSuccess({ authInfo }));
           this.router.navigate(['/', 'category']);
         },
-        error: (error) => {
-          this.store.dispatch(AuthActions.loginFailure({ error }));
+        error: ({ error }) => {
+          this.toastr.error(error);
         },
       });
   }
 
   registerUser(email: string, username: string, password: string) {
+    this.store.dispatch(AuthActions.register());
     const data = {
       email,
       username,
@@ -83,8 +88,8 @@ export class AuthService {
           this.store.dispatch(AuthActions.registerSuccess({ authInfo }));
           this.router.navigate(['/', 'category']);
         },
-        error: (error) => {
-          this.store.dispatch(AuthActions.registerFailure({ error }));
+        error: ({ error }) => {
+          this.toastr.error(error);
         },
       });
   }
@@ -120,8 +125,7 @@ export class AuthService {
           this.store.dispatch(AuthActions.loginSuccess({ authInfo }));
           this.router.navigate(['/', 'category']);
         },
-        error: (error) => {
-          console.log('error :', error);
+        error: () => {
           localStorage.removeItem('token');
         },
       });

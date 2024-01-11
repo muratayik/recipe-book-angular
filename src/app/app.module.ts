@@ -3,6 +3,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { MatIconModule } from '@angular/material/icon';
 
+import { StoreModule } from '@ngrx/store';
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 import { AppComponent } from './app.component';
 import { CategoryListComponent } from './category/category-list/category-list.component';
 import { MealListComponent } from './meal/meal-list/meal-list.component';
@@ -15,7 +19,6 @@ import { LogoutComponent } from './auth/logout/logout.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RegisterComponent } from './auth/register/register.component';
 import { FavoriteComponent } from './favorite/favorite.component';
-import { StoreModule } from '@ngrx/store';
 
 import * as fromApp from './store/state';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
@@ -41,12 +44,17 @@ import { CardFooterComponent } from './shared/card/card-footer/card-footer.compo
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutesModule,
     HttpClientModule,
     ReactiveFormsModule,
     MatIconModule,
     StoreModule.forRoot(fromApp.appReducer),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
+    ToastrModule.forRoot({
+      progressBar: true,
+      timeOut: 3000,
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent],
