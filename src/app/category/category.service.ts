@@ -7,6 +7,8 @@ import * as CategoryActions from '../store/category/category.actions';
 
 import { Category } from './category.model';
 
+import { environment } from 'src/environments/environment';
+
 @Injectable({ providedIn: 'root' })
 export class CategoryService {
   constructor(
@@ -18,7 +20,7 @@ export class CategoryService {
     this.store.dispatch(CategoryActions.fetchCategories());
 
     return this.http
-      .get<Category[]>('http://localhost:3001/category')
+      .get<Category[]>(`${environment.apiUrl}/category`)
       .subscribe({
         next: (categories) => {
           this.store.dispatch(

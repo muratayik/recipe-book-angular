@@ -10,6 +10,8 @@ import * as FavoriteActions from '../store/favorite/favorite.actions';
 import { AuthService } from '../auth/auth.service';
 import { MealListItem } from '../meal/meal-list-item.model';
 
+import { environment } from 'src/environments/environment';
+
 @Injectable({ providedIn: 'root' })
 export class FavoriteService {
   userFavorites: MealListItem[] = [];
@@ -35,7 +37,7 @@ export class FavoriteService {
 
     this.http
       .get<MealListItem[]>(
-        'http://localhost:3001/favorite',
+        `${environment.apiUrl}/favorite`,
         this.createHeaderWithToken()
       )
       .subscribe({
@@ -53,7 +55,7 @@ export class FavoriteService {
   addToFavorites(mealPublicId: string) {
     this.http
       .post<MealListItem>(
-        'http://localhost:3001/favorite/add',
+        `${environment.apiUrl}/favorite/add`,
         { mealPublicId },
         this.createHeaderWithToken()
       )
@@ -70,7 +72,7 @@ export class FavoriteService {
   removeFromFavorites(mealPublicId: string) {
     this.http
       .post<MealListItem>(
-        'http://localhost:3001/favorite/remove',
+        `${environment.apiUrl}/favorite/remove`,
         { mealPublicId },
         this.createHeaderWithToken()
       )

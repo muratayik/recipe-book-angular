@@ -8,6 +8,8 @@ import * as MealActions from '../store/meal/meal.actions';
 import { MealListItem } from './meal-list-item.model';
 import { MealDetail } from './meal-detail.model';
 
+import { environment } from 'src/environments/environment';
+
 @Injectable({ providedIn: 'root' })
 export class MealService {
   constructor(
@@ -16,7 +18,7 @@ export class MealService {
   ) {}
 
   getMeals(categoryName: string) {
-    const url = `http://localhost:3001/meal/byCategory/${categoryName}`;
+    const url = `${environment.apiUrl}/meal/byCategory/${categoryName}`;
 
     this.store.dispatch(MealActions.fetchMealList());
 
@@ -31,7 +33,7 @@ export class MealService {
   }
 
   getMeal(mealPublicId: string) {
-    const url = `http://localhost:3001/meal/${mealPublicId}/detail`;
+    const url = `${environment.apiUrl}/meal/${mealPublicId}/detail`;
     this.http.get<MealDetail>(url).subscribe({
       next: (mealDetail) => {
         this.store.dispatch(MealActions.fetchMealDetailSuccess({ mealDetail }));

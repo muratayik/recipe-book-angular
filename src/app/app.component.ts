@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from './auth/auth.service';
-import { Subscription } from 'rxjs';
 import { FavoriteService } from './favorite/favorite.service';
 
 import { Store } from '@ngrx/store';

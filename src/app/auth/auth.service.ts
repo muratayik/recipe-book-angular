@@ -8,6 +8,8 @@ import { Store } from '@ngrx/store';
 import * as fromApp from '../store/state';
 import * as AuthActions from '../store/auth/auth.actions';
 
+import { environment } from 'src/environments/environment';
+
 @Injectable({
   providedIn: 'root',
 })
@@ -30,7 +32,7 @@ export class AuthService {
       password,
     };
     return this.http
-      .post<AuthAPIResponse>('http://localhost:3001/account/login', data)
+      .post<AuthAPIResponse>(`${environment.apiUrl}/account/login`, data)
       .subscribe({
         next: (data) => {
           const { email, role, token, username } = data;
@@ -63,7 +65,7 @@ export class AuthService {
     };
 
     return this.http
-      .post<AuthAPIResponse>('http://localhost:3001/account/register', data)
+      .post<AuthAPIResponse>(`${environment.apiUrl}/account/register`, data)
       .subscribe({
         next: (data) => {
           const { email, role, token, username } = data;
@@ -102,7 +104,7 @@ export class AuthService {
     };
 
     return this.http
-      .post<AuthAPIResponse>('http://localhost:3001/account/verify', data)
+      .post<AuthAPIResponse>(`${environment.apiUrl}/account/verify`, data)
       .subscribe({
         next: (data) => {
           const { email, role, username } = data;
